@@ -55,11 +55,13 @@ const handlerUserLogin = async (req, res) =>{
         }
         else{
             try{
+                const isProduction = process.env.NODE_ENV === "production";
+
                 const token = setUser(logingUser);
                 res.cookie("uid", token, {
                     httpOnly: true,
-                    secure: false,
-                    sameSite: "lax",
+                    secure: isProduction,
+                    sameSite: isProduction ? "none" : "lax",
                 });
                 res.status(200).json({
                     success: true,
