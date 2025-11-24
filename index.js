@@ -41,7 +41,7 @@ app.use(
 );
 
 // Ensure OPTIONS preflight requests are handled
-app.options("*", cors());
+app.options("/*", cors());
 
 
 app.use(express.urlencoded());
